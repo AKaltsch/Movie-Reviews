@@ -17,10 +17,12 @@ function App() {
     Axios.post("http://localhost:3001/api/insert", {
       carName: carName,
       carReview: carReview,
-    }).then(() => {
-      console.log("promise is returning");
-      alert("successful insert");
     });
+
+    setCarReviewList([
+      ...carReviewList,
+      { carName: carName, carReview: carReview },
+    ]);
   };
 
   return (
@@ -44,9 +46,10 @@ function App() {
 
         {carReviewList.map((review) => {
           return (
-            <h3 key={review.id}>
-              Car: {review.carName} | Review: {review.carReview}
-            </h3>
+            <div className="card" key={review.id}>
+              <h3>{review.carName}</h3>
+              <p>{review.carReview}</p>
+            </div>
           );
         })}
       </div>
