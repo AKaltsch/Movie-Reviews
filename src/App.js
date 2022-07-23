@@ -45,7 +45,7 @@ function App() {
         {carReviewList.map((review) => {
           return (
             <h3 key={review.id}>
-              Car: {review.carName} Review: {review.carReview}
+              Car: {review.carName} | Review: {review.carReview}
             </h3>
           );
         })}
