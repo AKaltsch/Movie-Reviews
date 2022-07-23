@@ -25,6 +25,10 @@ function App() {
     ]);
   };
 
+  const deleteReview = (carId) => {
+    Axios.delete(`http://localhost:3001/api/delete/${carId}`);
+  };
+
   return (
     <div className="App">
       <h1>Application</h1>
@@ -49,6 +53,16 @@ function App() {
             <div className="card" key={review.id}>
               <h3>{review.carName}</h3>
               <p>{review.carReview}</p>
+
+              <button
+                onClick={() => {
+                  deleteReview(review.id);
+                }}
+              >
+                Delete
+              </button>
+              <input type="text" id="updateInput" />
+              <button>Update</button>
             </div>
           );
         })}
