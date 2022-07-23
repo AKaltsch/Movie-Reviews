@@ -7,6 +7,8 @@ function App() {
   const [carReview, setCarReview] = useState("");
   const [carReviewList, setCarReviewList] = useState([]);
 
+  const [newReview, setNewReview] = useState("");
+
   useEffect(() => {
     Axios.get("http://localhost:3001/api/get").then((res) => {
       setCarReviewList(res.data);
@@ -27,6 +29,14 @@ function App() {
 
   const deleteReview = (carId) => {
     Axios.delete(`http://localhost:3001/api/delete/${carId}`);
+  };
+
+  const updateReview = (name) => {
+    Axios.put(`http://localhost:3001/api/update`, {
+      carName: name,
+      carReview: newReview,
+    });
+    setNewReview("");
   };
 
   return (
@@ -61,8 +71,20 @@ function App() {
               >
                 Delete
               </button>
-              <input type="text" id="updateInput" />
-              <button>Update</button>
+              <input
+                type="text"
+                id="updateInput"
+                onChange={(e) => {
+                  setNewReview(e.target.value);
+                }}
+              />
+              <button
+                onClick={() => {
+                  updateReview(review.carName);
+                }}
+              >
+                Update
+              </button>
             </div>
           );
         })}
